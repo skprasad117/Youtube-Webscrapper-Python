@@ -1,0 +1,8 @@
+selenium == 3.141.0
+flask==2.2.2
+Flask-Cors==3.0.10
+gunicorn==20.0.4
+Jinja2
+snowflake-connector-python == 2.7.12
+pymongo==4.2.0
+pymongo[srv]

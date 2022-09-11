@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+
+      <link rel="stylesheet" href="./style.css">
+
+<style>
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: white;
+  margin-top: 20px;
+  word-break: break-all;
+  display :none;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href = "https://github.com/skprasad117" target="_blank"><div class="menu" style="position:fixed;" ><i class="fa fa-github" style="font-size:58px"></i>GITHUB</div></a>
+  <div class="table-users">
+      <div class="header"><b style="text-align: center; color:#E34234;">YOUTUBE SCRAPPER</b></div>
+      <div class="header"><b><span style="color:white">Channel : {{reviews['youtuber_info']['name']}}<span></span></b></div>
+      <div class="msg"><b>* <u style="color:red;">{{reviews['status']}}</u> to get new data make scrape request</b></div>
+      <table cellspacing="0">
+               <tr>
+                   <th><b>Channel Thumbnail</b></th>
+                   <th><b>Subscribers</b></th>
+                   <th><b>Data Fetched on</b></th>
+                   <th><b>Visit Channel</b></th>
+                   <th>Thumbnail base64</th>
+                   <th>Scrap Again</th>
+               </tr>
+               <tr>
+                   <td><img src="{{reviews['youtuber_info']['channel_thum_link']}}"></td>
+                   <td>{{reviews['youtuber_info']['subs']}}</td>
+                   <td><p style="text-align:center">{{reviews['youtuber_info']['fetchon']}}</p></td>
+                   <td><button type="button" class="button"><a href="{{reviews['youtuber_info']['channel_link']}}" target="_blank">click</a></button></td>
+                   <td><button onclick="myFunction()" class="button">show/hide</button></td>
+                   <td>
+                       <form action="/scrapagain" method="POST">
+    <input type="hidden" name="link" value="{{reviews['youtuber_info']['channel_link']}}"/>
+    <input type="hidden" name="length" value="{{reviews['askedfor']}}"/>
+    <button name ="submit" value="scrap" type="submit" class="button">scrap</button>
+</form>
+                   </td>
+
+
+                    </tr>
+
+      </table>
+      <div id="myDIV">{{reviews['youtuber_info']['thum_base']}}</div>
+      <table cellspacing="0">
+
+          <tr>
+              <th>Sno</th>
+              <th>Title/link</th>
+              <th>Thumbnail</th>
+              <th>Uploade Date</th>
+              <th>Length</th>
+              <th>Views</th>
+              <th>Likes</th>
+              <th>Total Comm.</th>
+              <th>Fetched comm.</th>
+          </tr>
+          {% for i in reviews['video']%}
+      <tr>
+          <td>{{i['count']}}</td>
+          <td>{{i['title']}}<br>
+              <button type="button" class="button"><a href="{{i['link']}}" target="_blank">Visit Video</a></button></td>
+          <td><img src="{{i['video_thum_link']}}"></td>
+          <td>{{i['date']}}</td>
+          <td>{{i['duration']}}</td>
+          <td>{{i['views']}}</td>
+          <td>{{i['likes']}}</td>
+          <td>{{i['total_comments']}}</td>
+          <td>{{i['fetched_comments']}}<br> <form action="/comments" method="POST">
+              <input type="hidden" name="videoid" value="{{i['count']}}"/>
+              <input type="hidden" name="channel" value="{{reviews['youtuber_info']['uid']}}"/>
+    <button name ="submit" value="scrap" type="submit" onclick="this.form.target='_blank';return true;" class="button">Show</button></form></td>
+      </tr>
+       {% endfor %}
+
+      </table>
+   </div>
+
+
+</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+</body>
+
+</html>

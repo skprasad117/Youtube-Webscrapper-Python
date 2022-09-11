@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Search Page</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
+
+{% block body %}
+<a href = "https://github.com/skprasad117" target="_blank"><div class="menu" style="position:fixed;" ><i class="fa fa-github" style="font-size:58px"></i>GITHUB</div></a>
+
+<div class="content">
+    <h1 style="text-align: center; color:#E34234;">YOUTUBE SCRAPPER</h1>
+
+    <div class="form">
+        <form action="/review" method="POST">
+            <input placeholder="youtube.com/xyz/channelname/video" type="text" name="content" class="content">
+            <input placeholder="length upto fetch eg: 10,50, 100" type="text" name="length" class="content">
+            <input type="submit" value="Search">
+        </form>
+        <div id = "note">
+            <h2 style="color:red"> Note:</h2>
+        <ol style="color:white">
+            <li><b>First it will going to look in the db for the info.</b>
+            <ul>
+                <li>If info is found then it will be displayed, <u>New scrap request can be made from this page
+                till the length specified during search.</u></li>
+                <li>If data is not present then it will be scrapped and pushed into the db.</li>
+            </ul></li>
+            <li><b>This app is working totally fine in local machine</b> </li>
+            <li style="color: red">Scrapping the request in one go take lot of time resulting in <u>Heroku Timeout Error.
+            Heroku default timeout is 30s.</u>
+            <ul>
+                <li>App gunicorn timeout is inc to 600sec. which will keep on running the scripts </li>
+            </ul></li>
+        </ol>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

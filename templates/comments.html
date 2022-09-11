@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+<a href = "https://github.com/skprasad117" target="_blank"><div class="menu" style="position:fixed;" ><i class="fa fa-github" style="font-size:58px"></i>GITHUB</div></a>
+
+
+  <div class="table-users">
+   <div class="header"><h3 style="text-align: center; color:#E34234;">YOUTUBE SCRAPPER</h3></div>
+      <div class="header"><b>COMMENTS</b></div>
+       <div>
+           <table cellspacing="0">
+               <tr>
+                   <td><img src="{{reviews["info"][1]}}"></td>
+                   <td><b>{{reviews["info"][0]}}</b></td>
+               </tr>
+           </table>
+           <table cellspacing="0">
+               <tr>
+                  <th><b>S.No</b></th>
+                   <th><b>Name</b></th>
+                   <th><b>Comment</b></th>
+                   <th><b>Date</b></th>
+                   <th><b>Likes</b></th>
+
+               </tr>
+                 {% for i in reviews['comments']%}
+               <tr>
+                   <td>{{i['count']}}</td>
+                   <td>{{i['Name']}}</td>
+                   <td>{{i['Comment']}}</td>
+                   <td>{{i['Date']}}</td>
+                   <td>{{i['Likes']}}</td>
+
+
+               </tr>
+                {% endfor %}
+           </table>
+
+
+
+
+
+
+
+
+
+
+
+   </div>
+
+
+</div>
+
+
+
+</body>
+
+</html>
